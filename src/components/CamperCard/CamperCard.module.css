@@ -1,0 +1,81 @@
+.camperCard {
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  border-radius: 20px;
+  padding: 24px;
+  width: 888px;
+  height: 358px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.camperCard > img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  /* object-fit: fill; */
+
+  border-radius: 10px;
+  width: 290px;
+  height: 310px;
+  background: url('/public/images/no-image-icon-23494.png'); /* Запасне зображення */
+  background-size: cover;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 526px;
+}
+
+.camperCard h2 {
+  line-height: 1.25;
+}
+
+.cardInfo {
+}
+
+.cardPrice {
+  /* font-family: var(--font-family); */
+  font-weight: 600;
+  font-size: 24px;
+  /* line-height: 125%; */
+  color: var(--main);
+}
+
+.camperCard p {
+  width: 100%;
+
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.favoriteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoriteButton svg {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease;
+}
+
+.favoriteButton svg {
+  fill: #000; /* Колір для не обраного стану */
+}
+
+.favoriteButton svg.favorite {
+  fill: #ff0000; /* Колір для обраного стану */
+}
+.favorite {
+  fill: #ff0000;
+}

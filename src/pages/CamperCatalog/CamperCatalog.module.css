@@ -1,0 +1,56 @@
+.camperCatalog {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.camperCard {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  border-radius: 8px;
+  flex: 1 0 21%; /* налаштування ширини для 4 колонок */
+  box-sizing: border-box;
+}
+
+.camperCard img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.camperCard h3 {
+  margin: 16px 0 8px;
+}
+
+.camperCard p {
+  margin: 8px 0;
+}
+
+.camperCard button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.camperCard button.favorite {
+  color: red;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
