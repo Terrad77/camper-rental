@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+ul,
+ol {
+  list-style-type: none;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -33,7 +38,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  /* color: #646cff; */
   text-decoration: inherit;
 }
 a:hover {
@@ -60,18 +65,18 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--button);
+  /* background-color: var(--button); */
   cursor: pointer;
   /* transition: border-color 0.25s; */
   transition: background-color 0.25s;
 }
 button:hover {
   /* border-color: #646cff; */
-  background-color: #d84343;
+  /* background-color: #d84343; */
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* outline: 4px auto -webkit-focus-ring-color; */
 }
 
 @media (prefers-color-scheme: light) {

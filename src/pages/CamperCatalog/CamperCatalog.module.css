@@ -31,12 +31,14 @@
 .camperCard button {
   background: none;
   border: none;
+  background-color: transparent;
   cursor: pointer;
   font-size: 24px;
+  fill: transparent;
 }
 
 .camperCard button.favorite {
-  color: red;
+  fill: red;
 }
 
 button {

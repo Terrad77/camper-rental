@@ -13,8 +13,6 @@
   display: block;
   width: 100%;
   object-fit: cover;
-  /* object-fit: fill; */
-
   border-radius: 10px;
   width: 290px;
   height: 310px;
@@ -25,32 +23,35 @@
 .cardContent {
   display: flex;
   flex-direction: column;
-  align-items: start;
   width: 526px;
 }
 
+.title {
+  display: flex;
+  padding: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
 .camperCard h2 {
+  display: flex;
+  color: var(--main);
   line-height: 1.25;
 }
 
 .cardInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .cardPrice {
-  /* font-family: var(--font-family); */
   font-weight: 600;
   font-size: 24px;
-  /* line-height: 125%; */
   color: var(--main);
-}
-
-.camperCard p {
-  width: 100%;
-
-  text-align: justify;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .favoriteButton {
@@ -61,21 +62,105 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 0;
 }
 
+.favoriteButton:hover,
+.favoriteButton:focus {
+  background: none;
+}
+
+/* Колір default стану */
 .favoriteButton svg {
-  width: 24px;
-  height: 24px;
   transition: fill 0.3s ease;
+  fill: transparent;
+  stroke: var(--main);
 }
 
-.favoriteButton svg {
-  fill: #000; /* Колір для не обраного стану */
-}
-
+/* Колір active стану */
 .favoriteButton svg.favorite {
-  fill: #ff0000; /* Колір для обраного стану */
+  fill: var(--button);
+  stroke: var(--button);
 }
-.favorite {
-  fill: #ff0000;
+
+.containerInfo {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.wraper {
+  color: var(--main);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.wraper::before {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 103px;
+  height: 1.5px;
+  background-color: var(--main);
+  margin-bottom: -1.3rem;
+  margin-left: 1.3rem;
+}
+.wraper:hover::before {
+  background-color: #535bf2;
+}
+.cardRating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.cardReviews {
+}
+
+.cardLocation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--main);
+}
+
+.camperCard p {
+  width: 100%;
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 24px;
+}
+
+.listOptions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.listItems {
+  border: none;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background: var(--block-features);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--main);
+  font-weight: 500;
+}
+
+.icon {
+  /* fill: red; */
+}
+.cardBtn {
+  border-radius: 200px;
+  padding: 16px 40px;
+  width: 166px;
+  height: 56px;
+  background: var(--button);
+  color: #fff;
+  line-height: 1.5em;
 }
