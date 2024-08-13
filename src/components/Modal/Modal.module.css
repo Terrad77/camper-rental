@@ -6,24 +6,34 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background: var(--main-placeholder);
+  background: rgba(17, 18, 19, 0.4);
   z-index: 1000;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
+  z-index: 1001;
   position: relative;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 100vh;
+  /* max-height: 100vh; */
   box-shadow: 0 4px 50px 0 var(--shadow);
-  max-width: 344px;
-  background: var(--main-white);
-  border-radius: 15px;
+  /* max-width: 344px; */
+  background: #fff;
+  /* border-radius: 15px; */
   overflow-y: scroll;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+  border-radius: 20px;
+  padding: 40px;
+  width: 982px;
+  /* height: 720px; */
+  display: flex;
+  flex-direction: column;
 }
 
 .closeBtn {
@@ -36,4 +46,26 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
+}
+.gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.containerImg {
+  display: flex;
+  border-radius: 10px;
+  width: 290px;
+  height: 310px;
+  background: url('/public/images/no-image-icon-23494.png'); /* Запасне зображення */
+  overflow: hidden;
+  background-position: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  /* overflow: hidden; */
+  object-fit: cover;
 }

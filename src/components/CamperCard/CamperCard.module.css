@@ -1,23 +1,40 @@
 .camperCard {
-  border: 1px solid rgba(16, 24, 40, 0.2);
-  border-radius: 20px;
-  padding: 24px;
-  width: 888px;
-  height: 358px;
   display: flex;
   flex-direction: row;
+  padding: 24px;
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  border-radius: 20px;
   gap: 24px;
+  /* width: 888px; */
+  /* height: 358px; */
 }
 
-.camperCard > img {
-  display: block;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+.containerImg {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+
+  /* width: 100%; */
   width: 290px;
   height: 310px;
-  background: url('/public/images/no-image-icon-23494.png'); /* Запасне зображення */
+
+  border-radius: 10px;
+  overflow: hidden;
+
+  background: url('/public/images/no-image-icon-23494.png') no-repeat center; /* Запасне зображення */
+  /* background-repeat: no-repeat;
+  background-position: center; */
+
+  background-color: var(--button);
+  /* vertical-align: middle; */
   background-size: cover;
+}
+
+.containerImg > img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .cardContent {
@@ -33,6 +50,16 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+  gap: 29px;
+}
+.title > h1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  color: #101828;
 }
 
 .camperCard h2 {
@@ -52,6 +79,7 @@
   font-weight: 600;
   font-size: 24px;
   color: var(--main);
+  line-height: 30px;
 }
 
 .favoriteButton {
@@ -70,14 +98,14 @@
   background: none;
 }
 
-/* Колір default стану */
+/* Колір іконки default стану */
 .favoriteButton svg {
   transition: fill 0.3s ease;
   fill: transparent;
   stroke: var(--main);
 }
 
-/* Колір active стану */
+/* Колір іконки active стану */
 .favoriteButton svg.favorite {
   fill: var(--button);
   stroke: var(--button);
@@ -114,8 +142,6 @@
   align-items: center;
   gap: 4px;
 }
-.cardReviews {
-}
 
 .cardLocation {
   display: flex;
@@ -150,17 +176,27 @@
   gap: 8px;
   color: var(--main);
   font-weight: 500;
+  line-height: 20px;
 }
 
-.icon {
-  /* fill: red; */
-}
 .cardBtn {
-  border-radius: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 16px 40px;
   width: 166px;
   height: 56px;
   background: var(--button);
-  color: #fff;
-  line-height: 1.5em;
+  border-radius: 200px;
+
+  color: #ffffff;
+  /* font-family: Inter; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  /* white-space: nowrap; */
+}
+.cardBtn:hover,
+.cardBtn:focus {
+  background-color: #d84343;
 }

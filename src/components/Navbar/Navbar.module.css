@@ -1,4 +1,17 @@
 .navContainer {
   display: flex;
   gap: 16px;
+  color: var(--main);
+}
+
+/* Стандартний стан */
+.navContainer a {
+  text-decoration: none;
+  color: var(--main);
+}
+
+/* Активний стан */
+.navContainer a.active {
+  text-decoration: underline;
+  color: blue;
 }

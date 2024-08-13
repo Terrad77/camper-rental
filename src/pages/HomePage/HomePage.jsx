@@ -2,7 +2,7 @@ import css from './HomePage.module.css';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className={css.page}>
       <h1>Welcome to Our Company site</h1>
       <p>We offer campervan rentals to help you enjoy your trip</p>
       <ul className={css.list}>

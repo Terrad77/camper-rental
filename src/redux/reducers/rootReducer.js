@@ -2,6 +2,7 @@ import { TOGGLE_FAVORITE } from '../actions/advertActions';
 
 const initialState = {
   favorites: [],
+  loading: false,
 };
 
 const rootReducer = (state = initialState, action) => {

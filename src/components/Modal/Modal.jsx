@@ -1,4 +1,5 @@
 import css from './Modal.module.css';
+import BookForm from '../BookForm/BookForm';
 
 const Modal = ({ camper, onClose }) => {
   return (
@@ -7,8 +8,22 @@ const Modal = ({ camper, onClose }) => {
         <button className={css.closeBtn} onClick={onClose}>
           ×
         </button>
-        <h2>{camper.name}</h2>
-        <p>{camper.details}</p>
+        <div className={css.content}>
+          <h2>{camper.name}</h2>
+          <ul className={css.gallery}>
+            {camper.gallery.map((image, index) => (
+              <li key={index} className={css.containerImg}>
+                <img
+                  src={image}
+                  alt={`Camper ${camper.name} ${index + 1}`}
+                  className={css.image}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p>{camper.description}</p>
         <BookForm />
       </div>
     </div>

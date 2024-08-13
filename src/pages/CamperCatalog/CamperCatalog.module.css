@@ -1,17 +1,158 @@
-.camperCatalog {
+.pageContainer {
   display: flex;
+  flex-direction: row;
+  gap: 64px;
+  /* padding: 100px 64px; */
+}
+
+.searchSectionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 360px;
+  gap: 32px;
+}
+
+.searchSectionContainer > p {
+  font-weight: 500;
+  color: var(--text);
+  /* margin-bottom: 14px; */
+}
+.searchSectionContainer > h2 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.locationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+  width: 360px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 18px;
+  background-color: var(--inputs);
+}
+
+.icon {
+  pointer-events: none; /* Щоб іконка не заважала введенню тексту */
+}
+
+.inputContainer input {
+  background: transparent;
+  border: none;
+  line-height: 1.25;
+}
+
+.inputContainer ::placeholder {
+  color: var(--main);
+  opacity: 1;
+}
+.inputContainer input {
+  outline: none;
+}
+
+/* -----  Equipment Filter ------- */
+.equipmentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: aqua;
+  gap: 24px;
+}
+.equipmentTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 14px;
+}
+
+.equipmentList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  /* justify-content: ; */
+  /* width: 100%; */
+
+  /* row-gap: 8px;
+  column-gap: 10px; */
+}
+.equipmentItem {
+  width: calc(340px / 3);
+}
+.equipmentButton {
+  display: flex;
+  flex-direction: column;
+  padding-top: 17px;
+  padding-bottom: 17px;
+
+  background-color: transparent;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--text);
+
+  border-radius: 10px;
+  /* padding: 17px 40px; */
+  width: 112px;
+  height: 95px;
+  color: var(--main);
+}
+/* .equipmentButton children {
+  text-align: center;
+  align-items: center;
+} */
+
+.equipmentButton:hover {
+  /* background-color: var(--hover-background); */
+}
+
+.equipmentButton.active {
+  border-color: var(--button);
+  /* background-color: var(--primary); */
+  /* color: var(--background); */
+}
+
+.typeContainer {
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
+.loadMoreBtn {
+  margin-top: 30px;
+  border: 1px solid rgba(71, 84, 103, 0.2);
+  border-radius: 200px;
+  padding: 16px 32px;
+  width: 145px;
+  height: 56px;
+  background-color: transparent;
+  white-space: nowrap;
+}
+.loadMoreBtn:focus,
+.loadMoreBtn:hover {
+  border-color: var(--button);
+}
 
 .camperCard {
-  border: 1px solid #ccc;
+  border: 1px solid rgba(71, 84, 103, 0.2);
   padding: 16px;
   margin: 16px;
   text-align: center;
   border-radius: 8px;
-  flex: 1 0 21%; /* налаштування ширини для 4 колонок */
-  box-sizing: border-box;
+  /* flex: 1 0 21%; налаштування ширини для 4 колонок */
+  /* box-sizing: border-box; */
 }
 
 .camperCard img {
@@ -41,7 +182,7 @@
   fill: red;
 }
 
-button {
+/* button {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
@@ -55,4 +196,4 @@ button {
 
 button:hover {
   background-color: #f0f0f0;
-}
+} */

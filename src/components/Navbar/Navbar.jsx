@@ -4,9 +4,24 @@ import css from './Navbar.module.css';
 const Navbar = () => {
   return (
     <nav className={css.navContainer}>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/catalog">Catalog</NavLink>
-      <NavLink to="/favorites">Favorites</NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? css.active : '')}
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to="/catalog"
+        className={({ isActive }) => (isActive ? css.active : '')}
+      >
+        Catalog
+      </NavLink>
+      <NavLink
+        to="/favorites"
+        className={({ isActive }) => (isActive ? css.active : '')}
+      >
+        Favorites
+      </NavLink>
     </nav>
   );
 };

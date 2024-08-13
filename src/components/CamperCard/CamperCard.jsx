@@ -2,53 +2,47 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorite } from '../../redux/actions/advertActions';
 import css from './CamperCard.module.css';
 import Icon from '../Icon/Icon';
-import List from '../LIst/List';
 
-const CamperCard = ({ camper }) => {
+const CamperCard = ({ camper, openModal }) => {
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites);
   const isFavorite = favorites.includes(camper._id);
 
-  // ф-ція обробник кліку "обране"
+  // ф-ція обробник кліку "в обране"
   const handleFavoriteClick = () => {
     dispatch(toggleFavorite(camper._id));
   };
 
-  // Вибір основного зображення
+  // основне зображення
   const mainImage = camper.gallery[0];
 
-  // елементи локації
+  // import елементів локації
   const [country, city] = camper.location.split(', ');
 
-  // Вибір наявних опцій
+  // прайс
+  const price = camper.price;
+
+  // ["key": value] усіх наявних опцій
   const details = Object.entries(camper.details);
 
   return (
     <div className={css.camperCard}>
-      <img
-        src={mainImage}
-        alt={`Camper ${camper.name}`}
-        className={css.mainImage}
-      />
-      {/* <div className={css.gallery}>
-        {camper.gallery.slice(1).map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Camper ${camper.name} ${index + 1}`}
-            className={css.image}
-          />
-        ))}
-      </div> */}
+      <div className={css.containerImg}>
+        <img
+          src={mainImage}
+          alt={`Campervan ${camper.name}`}
+          className={css.mainImage}
+        />
+      </div>
       <div className={css.cardContent}>
         <div className={css.title}>
-          <h2>{camper.name}</h2>
+          <h1>{camper.name}</h1>
           <div className={css.cardInfo}>
             <span className={css.cardPrice}>
-              €
-              {camper.price.toLocaleString('eu-EU', {
+              €{`${price},00`}
+              {/* {camper.price.toLocaleString('eu-EU', {
                 minimumFractionDigits: 2,
-              })}
+              })} */}
             </span>
             <button
               onClick={handleFavoriteClick}
@@ -88,7 +82,6 @@ const CamperCard = ({ camper }) => {
         <p>{camper.description}</p>
         <ul className={css.listOptions}>
           <li className={css.listItems}>
-            {/* <List items={items} /> */}{' '}
             <Icon className={css.icon} id="icon-Users" width={20} height={20} />
             {camper.adults} adults
           </li>
@@ -131,7 +124,9 @@ const CamperCard = ({ camper }) => {
             </li>
           )}
         </ul>
-        <button className={css.cardBtn}>Show more</button>
+        <button className={css.cardBtn} onClick={() => openModal(camper)}>
+          Show more
+        </button>
       </div>
     </div>
   );

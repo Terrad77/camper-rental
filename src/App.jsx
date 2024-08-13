@@ -4,17 +4,31 @@ import Navbar from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage/HomePage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 import CamperCatalog from './pages/CamperCatalog/CamperCatalog';
+import { useSelector } from 'react-redux';
+import { Suspense } from 'react';
+import Loader from './components/Loader/Loader';
+import { selectLoading } from './redux/slice';
 
 function App() {
+  const isLoading = useSelector(selectLoading);
+
   return (
-    <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/catalog" element={<CamperCatalog />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-      </Routes>
-    </div>
+    <>
+      <Suspense fallback={<Loader />}>
+        <div className="App">
+          <Navbar />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/catalog" element={<CamperCatalog />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+            </Routes>
+          )}
+        </div>
+      </Suspense>
+    </>
   );
 }
 
