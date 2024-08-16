@@ -123,6 +123,18 @@
   /* color: var(--background); */
 }
 
+/* ----- section cardsContainer  ------- */
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* background-color: var(--inputs); */
+  /* width: 888px; */
+}
+
 .cardBtn {
   display: flex;
   flex-direction: row;
@@ -144,13 +156,6 @@
   background-color: #d84343;
 }
 
-.cardsContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
 .loadMoreBtn {
   margin-top: 30px;
   border: 1px solid rgba(71, 84, 103, 0.2);
@@ -204,8 +209,13 @@
 }
 
 .noResultsMessage {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--inputs);
+  border-radius: 20px;
   font-size: 28px;
   color: var(--text);
-  text-align: center;
-  /* margin-top: 20px; */
+  /* text-align: center; */
 }

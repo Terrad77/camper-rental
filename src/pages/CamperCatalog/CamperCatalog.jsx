@@ -39,10 +39,7 @@ const CamperCatalog = () => {
   // Обробник кнопки "Load more"
   const loadMore = () => {
     const nextIndex = visibleIndex + itemsPerPage;
-    const newVisibleCampers = campers.slice(
-      nextIndex,
-      nextIndex + itemsPerPage,
-    );
+    const newVisibleCampers = filteredCampers.slice(visibleIndex, nextIndex);
     setDisplayedCampers(newVisibleCampers);
     setVisibleIndex(nextIndex);
   };
@@ -57,8 +54,7 @@ const CamperCatalog = () => {
     setSelectedCamper(null);
   };
 
-  // Фільтрація списку кемперів за фільтрами
-
+  // відфільтрований список кемперів
   const filteredCampers = campers.filter(camper => {
     const matchesLocation =
       locationFilter === '' ||
@@ -97,8 +93,8 @@ const CamperCatalog = () => {
 
   // handler Search button
   const handleSearch = () => {
-    setDisplayedCampers(filteredCampers.slice(0, itemsPerPage));
-    setVisibleIndex(0);
+    setDisplayedCampers(filteredCampers.slice(0, itemsPerPage)); // перший диапазон елементів
+    setVisibleIndex(itemsPerPage); // оновлення видмого індексу для наступної загрузки
   };
 
   return (
@@ -272,7 +268,7 @@ const CamperCatalog = () => {
         <button
           className={`${css.cardBtn} ${isSearchActive ? css.active : ''}`}
           onClick={handleSearch}
-          disabled={!isSearchActive}
+          // disabled={!isSearchActive}
         >
           Search
         </button>
@@ -280,7 +276,8 @@ const CamperCatalog = () => {
       <div className={css.cardsContainer}>
         {displayedCampers.length === 0 ? (
           <p className={css.noResultsMessage}>
-            No campers found. Please adjust your filters.
+            No campers found with matched parameters. Please change your search
+            filters.
           </p>
         ) : (
           <>
@@ -291,8 +288,8 @@ const CamperCatalog = () => {
                 openModal={openModal}
               />
             ))}
-            {displayedCampers.length > 4 &&
-              visibleIndex + itemsPerPage < campers.length && (
+            {displayedCampers.length > 0 &&
+              visibleIndex < filteredCampers.length && (
                 <button className={css.loadMoreBtn} onClick={loadMore}>
                   Load more
                 </button>
