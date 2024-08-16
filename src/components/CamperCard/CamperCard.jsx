@@ -39,10 +39,12 @@ const CamperCard = ({ camper, openModal }) => {
           <h1>{camper.name}</h1>
           <div className={css.cardInfo}>
             <span className={css.cardPrice}>
-              €{`${price},00`}
-              {/* {camper.price.toLocaleString('eu-EU', {
-                minimumFractionDigits: 2,
-              })} */}
+              {price.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'EUR',
+                currencyDisplay: 'symbol',
+                useGrouping: false, //убрать разделитель тысяч
+              })}
             </span>
             <button
               onClick={handleFavoriteClick}

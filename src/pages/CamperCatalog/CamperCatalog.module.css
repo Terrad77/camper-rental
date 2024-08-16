@@ -12,6 +12,9 @@
   width: 360px;
   gap: 32px;
 }
+.searchSectionContainer .cardBtn {
+  margin-top: 40px;
+}
 
 .searchSectionContainer > p {
   font-weight: 500;
@@ -64,7 +67,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  background-color: aqua;
+
   gap: 24px;
 }
 .equipmentTitle {
@@ -88,39 +91,57 @@
 .equipmentItem {
   width: calc(340px / 3);
 }
+
 .equipmentButton {
   display: flex;
   flex-direction: column;
-  padding-top: 17px;
-  padding-bottom: 17px;
-
   background-color: transparent;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   border: 1px solid var(--text);
+  color: var(--main);
 
   border-radius: 10px;
-  /* padding: 17px 40px; */
-  width: 112px;
+
   height: 95px;
-  color: var(--main);
-}
-/* .equipmentButton children {
-  text-align: center;
-  align-items: center;
-} */
+  min-width: 112px;
 
-.equipmentButton:hover {
-  /* background-color: var(--hover-background); */
+  line-height: 125%;
+}
+.equipmentItem .icon {
+  margin-bottom: 8px;
+}
+.equipmentButton:hover,
+.equipmentButton:focus {
+  /* border-color: var(--button); */
+  background-color: var(--inputs);
 }
 
-.equipmentButton.active {
+.active {
   border-color: var(--button);
   /* background-color: var(--primary); */
   /* color: var(--background); */
 }
 
-.typeContainer {
+.cardBtn {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 40px;
+  width: 166px;
+  height: 56px;
+  background: var(--button);
+  border-radius: 200px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+
+  /* style Search button */
+  line-height: 24px;
+  justify-content: center;
+}
+.cardBtn:hover,
+.cardBtn:focus {
+  background-color: #d84343;
 }
 
 .cardsContainer {
@@ -182,18 +203,9 @@
   fill: red;
 }
 
-/* button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  transition: background-color 0.3s;
+.noResultsMessage {
+  font-size: 28px;
+  color: var(--text);
+  text-align: center;
+  /* margin-top: 20px; */
 }
-
-button:hover {
-  background-color: #f0f0f0;
-} */

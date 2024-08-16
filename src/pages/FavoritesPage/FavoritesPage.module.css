@@ -1,0 +1,86 @@
+.cardBtn {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 40px;
+  width: 166px;
+  height: 56px;
+  background: var(--button);
+  border-radius: 200px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+
+  /* style Search button */
+  line-height: 24px;
+  justify-content: center;
+}
+.cardBtn:hover,
+.cardBtn:focus {
+  background-color: #d84343;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.loadMoreBtn {
+  margin-top: 30px;
+  border: 1px solid rgba(71, 84, 103, 0.2);
+  border-radius: 200px;
+  padding: 16px 32px;
+  width: 145px;
+  height: 56px;
+  background-color: transparent;
+  white-space: nowrap;
+}
+.loadMoreBtn:focus,
+.loadMoreBtn:hover {
+  border-color: var(--button);
+}
+
+.camperCard {
+  border: 1px solid rgba(71, 84, 103, 0.2);
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  border-radius: 8px;
+  /* flex: 1 0 21%; налаштування ширини для 4 колонок */
+  /* box-sizing: border-box; */
+}
+
+.camperCard img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.camperCard h3 {
+  margin: 16px 0 8px;
+}
+
+.camperCard p {
+  margin: 8px 0;
+}
+
+.camperCard button {
+  background: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  fill: transparent;
+}
+
+.camperCard button.favorite {
+  fill: red;
+}
+
+.noResultsMessage {
+  font-size: 28px;
+  color: var(--text);
+  text-align: center;
+  /* margin-top: 20px; */
+}
