@@ -128,11 +128,13 @@
 .cardsContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: start;
+
+  flex-wrap: nowrap;
   gap: 20px;
   /* background-color: var(--inputs); */
   /* width: 888px; */
+  height: 1528px;
 }
 
 .cardBtn {
@@ -165,10 +167,14 @@
   height: 56px;
   background-color: transparent;
   white-space: nowrap;
+  display: none;
 }
 .loadMoreBtn:focus,
 .loadMoreBtn:hover {
   border-color: var(--button);
+}
+.visible {
+  display: block;
 }
 
 .camperCard {

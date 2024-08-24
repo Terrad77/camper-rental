@@ -22,11 +22,11 @@
   border-radius: 10px;
   overflow: hidden;
 
-  background: url('/public/images/no-image-icon-23494.png') no-repeat center; /* Запасне зображення */
+  background: url('/images/no-image-icon-23494.png') no-repeat center; /* Запасне зображення */
   /* background-repeat: no-repeat;
   background-position: center; */
 
-  background-color: var(--button);
+  background-color: var(--inputs);
   /* vertical-align: middle; */
   background-size: cover;
 }

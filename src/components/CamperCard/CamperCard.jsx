@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '../../redux/actions/advertActions';
+// import { toggleFavorite } from '../../redux/actions/advertActions';
 import css from './CamperCard.module.css';
 import Icon from '../Icon/Icon';
 
 const CamperCard = ({ camper, openModal }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.favorites);
+  const favorites = useSelector(state => state.campers.favorites || []);
   const isFavorite = favorites.includes(camper._id);
 
   // ф-ція обробник кліку "в обране"
@@ -17,7 +17,8 @@ const CamperCard = ({ camper, openModal }) => {
   const mainImage = camper.gallery[0];
 
   // import елементів локації
-  const [country, city] = camper.location.split(', ');
+  const [country = 'Unknown Country', city = 'Unknown City'] =
+    camper.location?.split(', ');
 
   // прайс
   const price = camper.price;
@@ -42,7 +43,7 @@ const CamperCard = ({ camper, openModal }) => {
               {price.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'EUR',
-                currencyDisplay: 'symbol',
+                // currencyDisplay: 'symbol',
                 useGrouping: false, //убрать разделитель тысяч
               })}
             </span>
@@ -62,8 +63,7 @@ const CamperCard = ({ camper, openModal }) => {
         <div className={css.containerInfo}>
           <a className={css.wraper} href="/">
             <span className={css.cardRating}>
-              <img src="/public/images/Rating.png" alt="Rating" />{' '}
-              {camper.rating}
+              <img src="/images/Rating.png" alt="Rating" /> {camper.rating}
             </span>
             <span className={css.cardReviews}>
               ({camper.reviews.length} Reviews)

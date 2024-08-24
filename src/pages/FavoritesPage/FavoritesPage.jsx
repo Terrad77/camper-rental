@@ -1,13 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { toggleFavorite } from '../../redux/actions/advertActions';
+// import { toggleFavorite } from '../../redux/actions/advertActions';
 import css from './FavoritesPage.module.css';
 import CamperCard from '../../components/CamperCard/CamperCard';
 import Modal from '../../components/Modal/Modal';
 
 const FavoritesPage = () => {
-  const favorites = useSelector(state => state.favorites);
-  const campers = useSelector(state => state.campers);
+  const { campers, favorites } = useSelector(state => state.campers);
   const dispatch = useDispatch();
 
   const itemsPerPage = 4;

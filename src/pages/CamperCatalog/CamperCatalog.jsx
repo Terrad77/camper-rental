@@ -5,20 +5,29 @@ import CamperCard from '../../components/CamperCard/CamperCard';
 import css from './CamperCatalog.module.css';
 import Modal from '../../components/Modal/Modal';
 import Icon from '../../components/Icon/Icon';
-import { setCampers } from '../../redux/actions/advertActions';
+import {
+  fetchCampersStart,
+  fetchCampersSuccess,
+  fetchCampersFailure,
+  toggleFavorite,
+  selectCampers,
+  selectLoading,
+  selectFavorites,
+} from '../../redux/reducers/camperSlice';
 
 const CamperCatalog = () => {
-  // const [campers, setCampers] = useState([]);
+  const campers = useSelector(selectCampers) || []; // Fallback or default state to prevent errors in rendering
+  // const campers = useSelector((state: RootState) => state.campers.campers);
   const [displayedCampers, setDisplayedCampers] = useState([]);
   const [visibleIndex, setVisibleIndex] = useState(0);
   const itemsPerPage = 4;
   const [selectedCamper, setSelectedCamper] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSearchTriggered, setIsSearchTriggered] = useState(false);
 
   const dispatch = useDispatch();
-  const campers = useSelector(state => state.campers);
 
-  // стани для фільтрів кемперів
+  // States for camper filters
   const [locationFilter, setLocationFilter] = useState('');
   const [equipmentFilter, setEquipmentFilter] = useState([]);
   const [typeFilter, setTypeFilter] = useState('');
@@ -28,23 +37,34 @@ const CamperCatalog = () => {
     axiosInstance
       .get('/adverts')
       .then(response => {
-        dispatch(setCampers(response.data)); // зберегаємо список кемперів в глобальному стані
-        setDisplayedCampers(response.data.slice(0, itemsPerPage));
+        const campersData = response.data;
+        console.log('Axios response data:', campersData);
+        // if (Array.isArray(campersData)) {
+        dispatch(fetchCampersSuccess(campersData)); // Save campers to Redux state
+        // setDisplayedCampers(campersData.slice(0, itemsPerPage)); // Display the first range of elements
+        // setVisibleIndex(itemsPerPage); // Set the visible index for the next load
+        // }
+        // else {
+        //   console.error('Data is not an array:', campersData);
+        //   dispatch(fetchCampersFailure());
+        // }
       })
       .catch(error => {
-        console.error('Error fetching campers:', error);
+        // console.error('Error fetching campers:', error);
+        console.log('response.data', campersData);
+        dispatch(fetchCampersFailure());
       });
   }, [dispatch]);
 
-  // Обробник кнопки "Load more"
+  // Load more button handler
   const loadMore = () => {
     const nextIndex = visibleIndex + itemsPerPage;
     const newVisibleCampers = filteredCampers.slice(visibleIndex, nextIndex);
-    setDisplayedCampers(newVisibleCampers);
+    setDisplayedCampers([...displayedCampers, ...newVisibleCampers]);
     setVisibleIndex(nextIndex);
   };
 
-  // обробники стану модалки
+  // Modal state handlers
   const openModal = camper => {
     setSelectedCamper(camper);
     setIsModalOpen(true);
@@ -54,8 +74,10 @@ const CamperCatalog = () => {
     setSelectedCamper(null);
   };
 
-  // відфільтрований список кемперів
-  const filteredCampers = campers.filter(camper => {
+  console.log('Campers from Redux:', campers);
+
+  // Filtered camper list
+  const filteredCampers = (campers || []).filter(camper => {
     const matchesLocation =
       locationFilter === '' ||
       camper.location.toLowerCase().includes(locationFilter.toLowerCase());
@@ -79,9 +101,9 @@ const CamperCatalog = () => {
   };
 
   // Toggle camper type filter
-
   const toggleTypeFilter = type => {
     setTypeFilter(prevType => (prevType === type ? '' : type));
+    setIsSearchTriggered(false); // Reset flag when filter changes
   };
 
   // Update displayed campers if filters change
@@ -91,10 +113,11 @@ const CamperCatalog = () => {
     );
   }, [locationFilter, equipmentFilter, typeFilter]);
 
-  // handler Search button
+  // Handler for Search button
   const handleSearch = () => {
-    setDisplayedCampers(filteredCampers.slice(0, itemsPerPage)); // перший диапазон елементів
-    setVisibleIndex(itemsPerPage); // оновлення видмого індексу для наступної загрузки
+    setDisplayedCampers(filteredCampers.slice(0, itemsPerPage)); // First range of elements
+    setVisibleIndex(itemsPerPage); // Update visible index for the next load
+    setIsSearchTriggered(true); // Set flag when search is triggered
   };
 
   return (
@@ -209,6 +232,7 @@ const CamperCatalog = () => {
             </li>
           </ul>
         </div>
+
         {/* Type Filter */}
         <div className={css.equipmentContainer}>
           <h2>Vehicle type</h2>
@@ -264,15 +288,16 @@ const CamperCatalog = () => {
             </li>
           </ul>
         </div>
+
         {/* Search Button */}
         <button
           className={`${css.cardBtn} ${isSearchActive ? css.active : ''}`}
           onClick={handleSearch}
-          // disabled={!isSearchActive}
         >
           Search
         </button>
       </div>
+
       <div className={css.cardsContainer}>
         {displayedCampers.length === 0 ? (
           <p className={css.noResultsMessage}>
@@ -288,12 +313,16 @@ const CamperCatalog = () => {
                 openModal={openModal}
               />
             ))}
-            {displayedCampers.length > 0 &&
-              visibleIndex < filteredCampers.length && (
-                <button className={css.loadMoreBtn} onClick={loadMore}>
-                  Load more
-                </button>
-              )}
+            {campers.length > 0 && visibleIndex < filteredCampers.length && (
+              <button
+                className={`${css.loadMoreBtn} ${
+                  isSearchActive ? css.visible : ''
+                }`}
+                onClick={loadMore}
+              >
+                Load more
+              </button>
+            )}
           </>
         )}
         {isModalOpen && selectedCamper && (
