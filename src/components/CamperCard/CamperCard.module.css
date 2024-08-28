@@ -5,37 +5,24 @@
   border: 1px solid rgba(16, 24, 40, 0.2);
   border-radius: 20px;
   gap: 24px;
-  /* width: 888px; */
-  /* height: 358px; */
 }
 
 .containerImg {
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
-
-  /* width: 100%; */
   width: 290px;
   height: 310px;
-
   border-radius: 10px;
   overflow: hidden;
-
   background: url('/images/no-image-icon-23494.png') no-repeat center; /* Запасне зображення */
-  /* background-repeat: no-repeat;
-  background-position: center; */
-
   background-color: var(--inputs);
-  /* vertical-align: middle; */
   background-size: cover;
 }
 
 .containerImg > img {
   object-fit: contain;
-  /* object-fit: cover; */
   height: 100%;
-  /* width: 100%; */
 }
 
 .cardContent {
@@ -59,7 +46,6 @@
   white-space: nowrap;
   font-weight: 600;
   font-size: 24px;
-  /* line-height: 30px; */
   line-height: 125%;
   color: var(--main);
 }

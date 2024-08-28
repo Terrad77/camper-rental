@@ -9,7 +9,7 @@ import {
   fetchCampersSuccess,
   fetchCampersFailure,
   selectCampers,
-} from '../../redux/reducers/camperSlice';
+} from '../../redux/slices/camperSlice';
 
 const CamperCatalog = () => {
   const campers = useSelector(selectCampers) || []; // Fallback or default state to prevent errors in rendering
@@ -310,13 +310,7 @@ const CamperCatalog = () => {
               />
             ))}
             {filteredCampers.length > visibleIndex && (
-              <button
-                className={css.loadMoreBtn}
-                // className={`${css.loadMoreBtn} ${
-                //   isSearchActive ? css.visible : ''
-                // }`}
-                onClick={loadMore}
-              >
+              <button className={css.loadMoreBtn} onClick={loadMore}>
                 Load more
               </button>
             )}

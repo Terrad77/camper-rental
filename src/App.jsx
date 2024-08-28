@@ -7,7 +7,7 @@ import CamperCatalog from './pages/CamperCatalog/CamperCatalog';
 import { useSelector } from 'react-redux';
 import { Suspense } from 'react';
 import Loader from './components/Loader/Loader';
-import { selectLoading } from './redux/reducers/camperSlice';
+import { selectLoading } from './redux/slices/camperSlice';
 
 function App() {
   const isLoading = useSelector(selectLoading);

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 // import { toggleFavorite } from '../../redux/actions/advertActions';
+import { toggleFavorite } from '../../redux/slices/camperSlice';
 import css from './CamperCard.module.css';
 import Icon from '../Icon/Icon';
 
@@ -43,7 +44,6 @@ const CamperCard = ({ camper, openModal }) => {
               {price.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'EUR',
-                // currencyDisplay: 'symbol',
                 useGrouping: false, //убрать разделитель тысяч
               })}
             </span>
@@ -101,7 +101,7 @@ const CamperCard = ({ camper, openModal }) => {
             <Icon className={css.icon} id="icon-Fuel" width={20} height={20} />
             {camper.engine.charAt(0).toUpperCase() + camper.engine.slice(1)}
           </li>
-          {Object.keys(camper.details).includes('kitchen') && (
+          {details.includes('kitchen') && (
             <li className={css.listItems}>
               <Icon
                 className={css.icon}
@@ -112,14 +112,14 @@ const CamperCard = ({ camper, openModal }) => {
               {`Kitchen`}
             </li>
           )}
-          {Object.keys(camper.details).includes('beds') && (
+          {details.includes('beds') && (
             <li className={css.listItems}>
               <Icon className={css.icon} id="icon-Bed" width={20} height={20} />
               {camper.details.beds} beds
             </li>
           )}
 
-          {Object.keys(camper.details).includes('airConditioner') && (
+          {details.includes('airConditioner') && (
             <li className={css.listItems}>
               <Icon className={css.icon} id="icon-AC" width={20} height={20} />
               {`AC`}

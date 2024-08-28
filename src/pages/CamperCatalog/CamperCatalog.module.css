@@ -173,9 +173,6 @@
 .loadMoreBtn:hover {
   border-color: var(--button);
 }
-.visible {
-  display: block;
-}
 
 .camperCard {
   border: 1px solid rgba(71, 84, 103, 0.2);

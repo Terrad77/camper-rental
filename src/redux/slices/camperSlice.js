@@ -16,32 +16,18 @@ const camperSlice = createSlice({
       state.error = null;
     },
     fetchCampersSuccess: (state, action) => {
-      // console.log('Fetching campers success:', action.payload); // [{13}]
-      // console.log(Array.isArray(action.payload));
-      // if (!state.campers) {
-      //   state.campers = []; // Ensure campers is always an array
-      // }
       if (Array.isArray(action.payload)) {
-        // console.log('state', current(state));
-        // console.log(action);
-        // console.log('state.campers', state.campers); // undefined
-        // state.campers.splice(0, state.campers.length, ...action.payload);
-        // state.campers = action.payload;
         state.campers = action.payload;
-        // console.log('state.campers', state.campers); // undefined
-        // state.campers = [...action.payload];
-        //Immer поддерживает безопасное обновление массива через методы, push, splice, и при помощи создания новых массивов. Прямое присвоение массива может вызвать ошибки
       } else {
         console.error('Payload is not an array:', action.payload);
       }
       state.loading = false;
       state.error = null;
-      // return state;
     },
     fetchCampersFailure(state, action) {
-      //   console.error('Fetching campers failed:', action.payload);
-      //   state.loading = false;
-      //   state.error = action.payload || 'Failed to fetch campers';
+      console.error('Fetching campers failed:', action.payload);
+      state.loading = false;
+      state.error = action.payload || 'Failed to fetch campers';
     },
 
     // toggleFavorite(state, action) {
@@ -67,12 +53,31 @@ const camperSlice = createSlice({
     //     );
     //   }
     // },
+
+    // toggleFavorite(state, action) {
+    //   const camperId = action.payload;
+    //   const camperIndex = state.campers.findIndex(c => c._id === camperId);
+    //   if (camperIndex !== -1) {
+    //     state.campers[camperIndex].isFavorite =
+    //       !state.campers[camperIndex].isFavorite;
+    //   }
+    // },
+
     toggleFavorite(state, action) {
       const camperId = action.payload;
       const camperIndex = state.campers.findIndex(c => c._id === camperId);
+
       if (camperIndex !== -1) {
-        state.campers[camperIndex].isFavorite =
-          !state.campers[camperIndex].isFavorite;
+        const isFavorite = !state.campers[camperIndex].isFavorite;
+        state.campers[camperIndex].isFavorite = isFavorite;
+
+        if (isFavorite) {
+          // Добавляем ID кемпера в список избранного
+          state.favorites.push(camperId);
+        } else {
+          // Удаляем ID кемпера из списка избранного
+          state.favorites = state.favorites.filter(id => id !== camperId);
+        }
       }
     },
   },

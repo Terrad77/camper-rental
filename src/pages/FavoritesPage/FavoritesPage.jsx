@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-// import { toggleFavorite } from '../../redux/actions/advertActions';
+
 import css from './FavoritesPage.module.css';
 import CamperCard from '../../components/CamperCard/CamperCard';
 import Modal from '../../components/Modal/Modal';
@@ -13,10 +13,6 @@ const FavoritesPage = () => {
   const [visibleIndex, setVisibleIndex] = useState(itemsPerPage);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCamper, setSelectedCamper] = useState(null);
-
-  const handleToggleFavorite = id => {
-    dispatch(toggleFavorite(id));
-  };
 
   const loadMore = () => {
     setVisibleIndex(prevIndex => prevIndex + itemsPerPage);

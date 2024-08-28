@@ -9,11 +9,10 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // використання localStorage
+import storage from 'redux-persist/lib/storage'; //use localStorage
 import { combineReducers } from 'redux';
-import camperReducer from './reducers/camperSlice';
-import postsReducer from './reducers/postsSlice';
-// import { composeWithDevTools } from 'redux-devtools-extension';
+import camperReducer from './slices/camperSlice';
+import postsReducer from './slices/postsSlice';
 
 // Налаштовуємо persistConfig
 const persistConfig = {
