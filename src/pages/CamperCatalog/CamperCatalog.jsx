@@ -6,18 +6,14 @@ import css from './CamperCatalog.module.css';
 import Modal from '../../components/Modal/Modal';
 import Icon from '../../components/Icon/Icon';
 import {
-  fetchCampersStart,
   fetchCampersSuccess,
   fetchCampersFailure,
-  toggleFavorite,
   selectCampers,
-  selectLoading,
-  selectFavorites,
 } from '../../redux/reducers/camperSlice';
 
 const CamperCatalog = () => {
   const campers = useSelector(selectCampers) || []; // Fallback or default state to prevent errors in rendering
-  // const campers = useSelector((state: RootState) => state.campers.campers);
+
   const [displayedCampers, setDisplayedCampers] = useState([]);
   const [visibleIndex, setVisibleIndex] = useState(0);
   const itemsPerPage = 4;
@@ -38,20 +34,16 @@ const CamperCatalog = () => {
       .get('/adverts')
       .then(response => {
         const campersData = response.data;
-        console.log('Axios response data:', campersData);
-        // if (Array.isArray(campersData)) {
-        dispatch(fetchCampersSuccess(campersData)); // Save campers to Redux state
-        // setDisplayedCampers(campersData.slice(0, itemsPerPage)); // Display the first range of elements
-        // setVisibleIndex(itemsPerPage); // Set the visible index for the next load
-        // }
-        // else {
-        //   console.error('Data is not an array:', campersData);
-        //   dispatch(fetchCampersFailure());
-        // }
+        if (Array.isArray(campersData)) {
+          dispatch(fetchCampersSuccess(campersData)); // Save campers to Redux state
+          setDisplayedCampers(campersData.slice(0, itemsPerPage)); // Display the first range of elements
+          setVisibleIndex(itemsPerPage); // Set visible index for the next portion load
+        } else {
+          console.error('Data is not an array:', campersData);
+          dispatch(fetchCampersFailure());
+        }
       })
       .catch(error => {
-        // console.error('Error fetching campers:', error);
-        console.log('response.data', campersData);
         dispatch(fetchCampersFailure());
       });
   }, [dispatch]);
@@ -60,7 +52,8 @@ const CamperCatalog = () => {
   const loadMore = () => {
     const nextIndex = visibleIndex + itemsPerPage;
     const newVisibleCampers = filteredCampers.slice(visibleIndex, nextIndex);
-    setDisplayedCampers([...displayedCampers, ...newVisibleCampers]);
+    // setDisplayedCampers([...displayedCampers, ...newVisibleCampers]); // Add cards to exists
+    setDisplayedCampers(newVisibleCampers); // Replace the current cards
     setVisibleIndex(nextIndex);
   };
 
@@ -74,17 +67,20 @@ const CamperCatalog = () => {
     setSelectedCamper(null);
   };
 
-  console.log('Campers from Redux:', campers);
-
   // Filtered camper list
-  const filteredCampers = (campers || []).filter(camper => {
+  const filteredCampers = campers.filter(camper => {
     const matchesLocation =
       locationFilter === '' ||
       camper.location.toLowerCase().includes(locationFilter.toLowerCase());
 
     const matchesEquipment =
       equipmentFilter.length === 0 ||
-      equipmentFilter.every(eq => camper.details[eq]);
+      equipmentFilter.every(eq => {
+        if (eq === 'automatic') {
+          return camper.transmission === 'automatic';
+        }
+        return camper.details[eq];
+      });
 
     const matchesType = typeFilter === '' || camper.form === typeFilter;
 
@@ -113,11 +109,11 @@ const CamperCatalog = () => {
     );
   }, [locationFilter, equipmentFilter, typeFilter]);
 
-  // Handler for Search button
+  // Handler Search button
   const handleSearch = () => {
-    setDisplayedCampers(filteredCampers.slice(0, itemsPerPage)); // First range of elements
+    setDisplayedCampers(filteredCampers.slice(0, itemsPerPage)); // Replace current cards with search results
     setVisibleIndex(itemsPerPage); // Update visible index for the next load
-    setIsSearchTriggered(true); // Set flag when search is triggered
+    setIsSearchTriggered(true); // Set flag for tracking search activity
   };
 
   return (
@@ -313,11 +309,12 @@ const CamperCatalog = () => {
                 openModal={openModal}
               />
             ))}
-            {campers.length > 0 && visibleIndex < filteredCampers.length && (
+            {filteredCampers.length > visibleIndex && (
               <button
-                className={`${css.loadMoreBtn} ${
-                  isSearchActive ? css.visible : ''
-                }`}
+                className={css.loadMoreBtn}
+                // className={`${css.loadMoreBtn} ${
+                //   isSearchActive ? css.visible : ''
+                // }`}
                 onClick={loadMore}
               >
                 Load more

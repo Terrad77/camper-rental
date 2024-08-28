@@ -167,7 +167,7 @@
   height: 56px;
   background-color: transparent;
   white-space: nowrap;
-  display: none;
+  /* display: none; */
 }
 .loadMoreBtn:focus,
 .loadMoreBtn:hover {

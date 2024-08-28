@@ -27,7 +27,7 @@ const camperSlice = createSlice({
         // console.log('state.campers', state.campers); // undefined
         // state.campers.splice(0, state.campers.length, ...action.payload);
         // state.campers = action.payload;
-        state.campers.push(action.payload);
+        state.campers = action.payload;
         // console.log('state.campers', state.campers); // undefined
         // state.campers = [...action.payload];
         //Immer поддерживает безопасное обновление массива через методы, push, splice, и при помощи создания новых массивов. Прямое присвоение массива может вызвать ошибки
